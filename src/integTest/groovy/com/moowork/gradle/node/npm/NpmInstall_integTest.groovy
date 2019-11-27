@@ -11,7 +11,7 @@ class NpmInstall_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {
@@ -34,7 +34,7 @@ class NpmInstall_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
             node {
                 npmVersion = "6.1.0"
@@ -63,7 +63,7 @@ class NpmInstall_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {

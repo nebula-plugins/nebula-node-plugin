@@ -8,7 +8,7 @@ class GruntPluginTest
     def 'check default tasks'()
     {
         when:
-        this.project.apply plugin: 'com.moowork.grunt'
+        this.project.apply plugin: 'nebula.grunt'
         this.project.evaluate()
 
         then:

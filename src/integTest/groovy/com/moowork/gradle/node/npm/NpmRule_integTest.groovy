@@ -11,7 +11,7 @@ class NpmRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {
@@ -34,7 +34,7 @@ class NpmRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
             
             node {
@@ -57,7 +57,7 @@ class NpmRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
             node {
                 npmVersion = "6.1.0"
@@ -80,7 +80,7 @@ class NpmRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {
@@ -105,7 +105,7 @@ class NpmRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {
@@ -134,7 +134,7 @@ class NpmRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
             node {
                 download = true
@@ -168,7 +168,7 @@ class NpmRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
             node {
                 npmVersion = "6.1.0"

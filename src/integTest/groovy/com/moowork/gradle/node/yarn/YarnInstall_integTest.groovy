@@ -11,7 +11,7 @@ class YarnInstall_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {
@@ -36,7 +36,7 @@ class YarnInstall_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
             node {
                 yarnVersion = "1.15.2"
@@ -66,7 +66,7 @@ class YarnInstall_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {

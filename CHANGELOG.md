@@ -124,7 +124,7 @@ Version 0.8 *(2014-11-19)*
 
 * Publish snapshots to jcenter _(dougborg)_
 * Add node to execution path for NodeExec _(dougborg)_
-* Use 'com.moowork.node' id instead of 'node
+* Use 'nebula.node' id instead of 'node
 * Upgraded wrapper to use Gradle 2.2
 
 Version 0.7 *(2014-11-03)*
@@ -138,7 +138,7 @@ Version 0.6 *(2014-07-10)*
 --------------------------
 
 * Upgrade to Gradle 2.0
-* Using 'com.moowork.node' as plugin id, but 'node' still works for another version
+* Using 'nebula.node' as plugin id, but 'node' still works for another version
 * Possible to read execResult for npm and node tasks _(johnrengelman)_
 
 Version 0.5 *(2014-03-29)*

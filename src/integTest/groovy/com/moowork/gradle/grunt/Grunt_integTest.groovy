@@ -11,7 +11,7 @@ class Grunt_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.grunt'
+                id 'nebula.grunt'
             }
 
             node {

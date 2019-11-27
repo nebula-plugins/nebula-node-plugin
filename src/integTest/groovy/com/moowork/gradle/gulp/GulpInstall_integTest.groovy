@@ -11,7 +11,7 @@ class GulpInstall_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.gulp'
+                id 'nebula.gulp'
             }
 
             node {

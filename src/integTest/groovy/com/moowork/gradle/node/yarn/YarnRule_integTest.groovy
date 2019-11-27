@@ -11,7 +11,7 @@ class YarnRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {
@@ -35,7 +35,7 @@ class YarnRule_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {

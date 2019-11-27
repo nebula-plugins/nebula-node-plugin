@@ -12,9 +12,9 @@ with Gradle:
 
 It's actually 3 plugins in one:
 
-* [Node Plugin](https://plugins.gradle.org/plugin/com.moowork.node) (`com.moowork.node`) - [See docs](docs/node.md).
-* [Grunt Plugin](https://plugins.gradle.org/plugin/com.moowork.grunt) (`com.moowork.grunt`) - [See docs](docs/grunt.md)
-* [Gulp Plugin](https://plugins.gradle.org/plugin/com.moowork.gulp) (`com.moowork.gulp`) - [See docs](docs/gulp.md)
+* [Node Plugin](https://plugins.gradle.org/plugin/nebula.node) (`nebula.node`) - [See docs](docs/node.md).
+* [Grunt Plugin](https://plugins.gradle.org/plugin/nebula.grunt) (`nebula.grunt`) - [See docs](docs/grunt.md)
+* [Gulp Plugin](https://plugins.gradle.org/plugin/nebula.gulp) (`nebula.gulp`) - [See docs](docs/gulp.md)
 
 
 

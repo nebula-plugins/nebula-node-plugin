@@ -11,7 +11,7 @@ class Node_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {
@@ -41,7 +41,7 @@ class Node_integTest
         given:
         writeBuild( '''
             plugins {
-                id 'com.moowork.node'
+                id 'nebula.node'
             }
 
             node {
