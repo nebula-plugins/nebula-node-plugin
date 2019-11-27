@@ -1,17 +1,10 @@
-buildscript {
-    apply from: "$rootDir/gradle/buildscript.gradle", to: buildscript
-}
-
-group = 'com.moowork.gradle'
+group = 'com.netflix.nebula'
 
 apply plugin: 'idea'
 apply plugin: 'groovy'
 apply plugin: 'maven-publish'
 apply plugin: 'java-gradle-plugin'
-apply from: "$rootDir/gradle/additional-artifacts.gradle"
-apply from: "$rootDir/gradle/coverage.gradle"
-apply from: "$rootDir/gradle/travis-ci.gradle"
-apply from: "$rootDir/gradle/publishing.gradle"
+
 
 ext.compatibilityVersion = '1.8'
 sourceCompatibility = compatibilityVersion
@@ -21,10 +14,6 @@ repositories {
     jcenter()
 }
 
-configurations {
-    integTestCompile.extendsFrom testCompileClasspath
-    integTestRuntime.extendsFrom testRuntimeClasspath
-}
 
 dependencies {
     implementation gradleApi()
@@ -33,22 +22,4 @@ dependencies {
     testImplementation( 'org.spockframework:spock-core:1.0-groovy-2.4' ) {
         exclude group: 'org.codehaus.groovy'
     }
-}
-
-tasks.withType( Test ) {
-    testLogging {
-        events "skipped", "failed"
-        exceptionFormat "full"
-    }
-}
-
-sourceSets {
-    integTest
-}
-
-task integTest( type: Test ) {
-    shouldRunAfter test
-
-    testClassesDirs = sourceSets.integTest.output.classesDirs
-    classpath = sourceSets.integTest.runtimeClasspath
 }

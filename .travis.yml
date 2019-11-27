@@ -1,13 +1,20 @@
-language: groovy
+language: java
 sudo: false
-
+matrix:
+  include:
+    - jdk: openjdk8
+      env: GRADLE_PUBLISH=true
+    - jdk: openjdk11
+      env: GRADLE_PUBLISH=false
+git:
+  depth: 150
+install: true
+script: "./gradle/buildViaTravis.sh"
 cache:
   directories:
-    - $HOME/.gradle
-
-jdk:
-- openjdk8
-
-script:
-- ./gradlew ci --stacktrace
-#- ./gradlew -p examples build --stacktrace
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+after_success:
+  - "./gradlew jacocoTestReport coveralls"
+env:
+  global:

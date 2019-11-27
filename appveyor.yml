@@ -1,8 +1,0 @@
-version: "{branch} {build}"
-
-build:
-  verbosity: detailed
-
-build_script:
-  - gradlew ci --stacktrace
-#  - gradlew -p examples build --stacktrace
