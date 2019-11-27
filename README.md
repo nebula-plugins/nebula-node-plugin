@@ -20,7 +20,7 @@ It's actually 3 plugins in one:
 
 ## Origin
 
-This was taken from (https://github.com/srs/gradle-node-plugin)[https://github.com/srs/gradle-node-plugin]
+This was taken from [srs/gradle-node-plugin](https://github.com/srs/gradle-node-plugin) due to lack of support/activity and the need to support Gradle 6.x
 
 
 ## License
