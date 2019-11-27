@@ -1,19 +1,11 @@
-group = 'com.netflix.nebula'
 
-apply plugin: 'idea'
-apply plugin: 'groovy'
-apply plugin: 'maven-publish'
-apply plugin: 'java-gradle-plugin'
-
-
-ext.compatibilityVersion = '1.8'
-sourceCompatibility = compatibilityVersion
-targetCompatibility = compatibilityVersion
+plugins {
+    id 'nebula.plugin-plugin' version '13.2.0'
+}
 
 repositories {
     jcenter()
 }
-
 
 dependencies {
     implementation gradleApi()
@@ -21,5 +13,52 @@ dependencies {
     testImplementation 'org.apache.commons:commons-io:1.3.2'
     testImplementation( 'org.spockframework:spock-core:1.0-groovy-2.4' ) {
         exclude group: 'org.codehaus.groovy'
+    }
+}
+
+gradlePlugin {
+    plugins {
+        nebulaGrunt {
+            id = 'nebula.grunt'
+            implementationClass = 'com.moowork.gradle.grunt.GruntPlugin'
+        }
+
+        nebulaGulp {
+            id = 'nebula.gulp'
+            implementationClass = 'com.moowork.gradle.gulp.GulpPlugin'
+        }
+
+        nebulaNode {
+            id = 'nebula.node'
+            implementationClass = 'com.moowork.gradle.node.NodePlugin'
+        }
+
+    }
+}
+
+pluginBundle {
+    website = 'https://github.com/nebula-plugins/nebula-node-plugin'
+    vcsUrl = 'https://github.com/nebula-plugins/nebula-node-plugin.git'
+    description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
+
+    plugins {
+        nebulaGrunt {
+            id = 'nebula.grunt'
+            displayName = 'Nebula Grunt Plugin'
+            description = 'Nebula Grunt Plugin'
+            tags = ['nebula']
+        }
+        nebulaGulp {
+            id = 'nebula.gulp'
+            displayName = 'Nebula Gulp Plugin'
+            description = 'Nebula Gulp Plugin'
+            tags = ['nebula']
+        }
+        nebulaNode {
+            id = 'nebula.node'
+            displayName = 'Nebula Node Plugin'
+            description = 'Nebula Node Plugin'
+            tags = ['nebula']
+        }
     }
 }

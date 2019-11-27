@@ -1,9 +1,0 @@
-apply plugin: 'com.moowork.grunt'
-
-node {
-    download = true
-}
-
-task helloWorld( type: GruntTask, dependsOn: installGrunt ) {}
-
-task build( dependsOn: 'helloWorld' ) {}
