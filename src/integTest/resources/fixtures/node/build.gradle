@@ -1,0 +1,39 @@
+plugins {
+    id "nebula.node"
+}
+
+node {
+    version = "12.13.0"
+    download = true
+    workDir = file("build/node")
+}
+
+def changeScript = System.properties["changeScript"] ? System.properties["changeScript"] == "true" : false
+def changeArgs = System.properties["changeArgs"] ? System.properties["changeArgs"] == "true" : false
+
+task hello(type: NodeTask) {
+    script = file("simple.js")
+    args = []
+    outputs.upToDateWhen {
+        true
+    }
+}
+
+if (changeScript) {
+    hello.script = file("name.js")
+}
+
+if (changeArgs) {
+    hello.args = ["Bob", "Alice"]
+}
+
+task helloFromIndex(type: NodeTask) {
+    script = file(".")
+    outputs.upToDateWhen {
+        true
+    }
+}
+
+task version(type: NodeTask) {
+    script = file("version.js")
+}

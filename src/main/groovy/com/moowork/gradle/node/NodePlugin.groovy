@@ -3,6 +3,7 @@ package com.moowork.gradle.node
 import com.moowork.gradle.node.npm.NpmInstallTask
 import com.moowork.gradle.node.npm.NpmSetupTask
 import com.moowork.gradle.node.npm.NpmTask
+import com.moowork.gradle.node.npm.NpxTask
 import com.moowork.gradle.node.task.NodeTask
 import com.moowork.gradle.node.task.SetupTask
 import com.moowork.gradle.node.variant.VariantBuilder
@@ -13,8 +14,10 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 class NodePlugin
-    implements Plugin<Project>
+        implements Plugin<Project>
 {
+    public static final String NODE_GROUP = "Node"
+
     private Project project
 
     private NodeExtension config
@@ -48,6 +51,7 @@ class NodePlugin
     {
         addGlobalTaskType( NodeTask )
         addGlobalTaskType( NpmTask )
+        addGlobalTaskType( NpxTask )
         addGlobalTaskType( YarnTask )
     }
 
@@ -68,18 +72,10 @@ class NodePlugin
     private void addNpmRule()
     {
         // note this rule also makes it possible to specify e.g. "dependsOn npm_install"
-        def workingDir
-        this.project.afterEvaluate {
-            workingDir = this.project.node.nodeModulesDir
-        }
         project.getTasks().addRule( 'Pattern: "npm_<command>": Executes an NPM command.' ) { String taskName ->
             if ( taskName.startsWith( "npm_" ) )
             {
                 NpmTask npmTask = project.getTasks().create( taskName, NpmTask.class )
-                if ( workingDir )
-                {
-                    npmTask.afterEvaluate( workingDir )
-                }
 
                 String[] tokens = taskName.split( '_' ).tail() // all except first
                 npmTask.npmCommand = tokens

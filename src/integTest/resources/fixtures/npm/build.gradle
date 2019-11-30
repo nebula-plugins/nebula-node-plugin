@@ -1,0 +1,28 @@
+plugins {
+    id 'nebula.node'
+}
+
+def changeInputs = System.properties["changeInputs"] ? System.properties["changeInputs"] == 'true' : false
+
+node {
+    npmVersion = "6.12.0"
+    download = true
+    workDir = file('build/node')
+}
+
+task test(type: NpmTask) {
+    dependsOn npmInstall
+    npmCommand = changeInputs ? ['run', 'test'] : ['run']
+    args = changeInputs ? [] : ['test']
+    inputs.dir('node_modules')
+    inputs.file('package.json')
+    inputs.files('index.js', 'test.js')
+    outputs.upToDateWhen {
+        true
+    }
+}
+
+task version(type: NpmTask) {
+    dependsOn npmInstall
+    npmCommand = ["--version"]
+}

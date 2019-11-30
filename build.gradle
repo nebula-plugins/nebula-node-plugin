@@ -14,6 +14,7 @@ dependencies {
     testImplementation( 'org.spockframework:spock-core:1.0-groovy-2.4' ) {
         exclude group: 'org.codehaus.groovy'
     }
+    testImplementation 'com.github.stefanbirkner:system-rules:1.19.0'
 }
 
 gradlePlugin {

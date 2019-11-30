@@ -5,25 +5,24 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Nested
-import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecResult
 
-class NpmTask
+class NpxTask
         extends DefaultTask
 {
-    protected NpmExecRunner runner
+    protected NpxExecRunner runner
 
     private List<?> args = []
 
     private ExecResult result
 
-    private String[] npmCommand
+    private String command
 
-    NpmTask()
+    NpxTask()
     {
         this.group = NodePlugin.NODE_GROUP
-        this.runner = new NpmExecRunner( this.project )
+        this.runner = new NpxExecRunner( this.project )
         dependsOn( NpmSetupTask.NAME )
     }
 
@@ -33,27 +32,19 @@ class NpmTask
     }
 
     @Input
-    @Optional
-    String[] getNpmCommand() {
-        return npmCommand
+    String getCommand() {
+        return command
     }
 
-    void setNpmCommand( String[] cmd )
+    void setCommand(String cmd )
     {
-        this.npmCommand = cmd
+        this.command = cmd
     }
 
     @Input
-    @Optional
     List<?> getArgs()
     {
         return this.args
-    }
-
-    @Nested
-    NpmExecRunner getExecRunner()
-    {
-        return this.runner
     }
 
     void setEnvironment( final Map<String, ?> value )
@@ -76,6 +67,12 @@ class NpmTask
         this.runner.execOverrides = closure
     }
 
+    @Nested
+    NpxExecRunner getRunner()
+    {
+        return runner
+    }
+
     @Internal
     ExecResult getResult()
     {
@@ -85,9 +82,9 @@ class NpmTask
     @TaskAction
     void exec()
     {
-        if ( this.npmCommand != null )
+        if ( this.command != null )
         {
-            this.runner.arguments.addAll( this.npmCommand )
+            this.runner.arguments.addAll( this.command )
         }
 
         this.runner.arguments.addAll( this.args )

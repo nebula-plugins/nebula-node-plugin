@@ -38,12 +38,16 @@ class VariantBuilder
 
         variant.nodeExec = "node"
         variant.npmExec = this.ext.npmCommand
+        variant.npxExec = this.ext.npxCommand
         variant.yarnExec = this.ext.yarnCommand
 
         if ( variant.windows )
         {
             if (variant.npmExec == 'npm') {
                 variant.npmExec = 'npm.cmd'
+            }
+            if (variant.npxExec == 'npx') {
+                variant.npxExec = 'npx.cmd'
             }
             if (variant.yarnExec == 'yarn') {
                 variant.yarnExec = 'yarn.cmd'
@@ -59,6 +63,7 @@ class VariantBuilder
                 variant.exeDependency = getExeDependency()
             }
             variant.npmScriptFile = new File( variant.nodeDir , 'node_modules/npm/bin/npm-cli.js')
+            variant.npxScriptFile = new File( variant.nodeDir , 'node_modules/npm/bin/npx-cli.js')
         }
         else
         {
@@ -67,6 +72,7 @@ class VariantBuilder
             variant.yarnBinDir = new File( variant.yarnBinDir, 'bin' )
             variant.archiveDependency = getArchiveDependency( osName, osArch, 'tar.gz' )
             variant.npmScriptFile = new File( variant.nodeDir , 'lib/node_modules/npm/bin/npm-cli.js')
+            variant.npxScriptFile = new File( variant.nodeDir , 'lib/node_modules/npm/bin/npx-cli.js')
         }
 
         if (this.ext.download)
@@ -77,6 +83,7 @@ class VariantBuilder
 
             variant.nodeExec = new File( variant.nodeBinDir, variant.nodeExec ).absolutePath
             variant.npmExec = new File( variant.npmBinDir, variant.npmExec ).absolutePath
+            variant.npxExec = new File( variant.npmBinDir, variant.npxExec ).absolutePath
             variant.yarnExec = new File( variant.yarnBinDir, variant.yarnExec ).absolutePath
         }
 
@@ -118,7 +125,7 @@ class VariantBuilder
         }
     }
 
-    //https://github.com/nodejs/node/pull/5995    
+    //https://github.com/nodejs/node/pull/5995
     private boolean hasWindowsZip()
     {
         def version = this.ext.version
@@ -128,10 +135,10 @@ class VariantBuilder
         def minorVersion = tokens[1].toInteger()
         def microVersion = tokens[2].toInteger()
         if (
-               ( majorVersion == 4 && minorVersion >= 5 ) // >= 4.5.0
-               || ( majorVersion == 6 && (minorVersion > 2 || (minorVersion == 2 && microVersion >= 1)) ) // >= 6.2.1
-               || majorVersion > 6
-           )
+        ( majorVersion == 4 && minorVersion >= 5 ) // >= 4.5.0
+                || ( majorVersion == 6 && (minorVersion > 2 || (minorVersion == 2 && microVersion >= 1)) ) // >= 6.2.1
+                || majorVersion > 6
+        )
         {
             return true
         }
