@@ -22,7 +22,7 @@ class NpmInstall_integTest
         ''' )
         writeEmptyPackageJson()
         writeFile('package-lock.json', '')
-        
+
         when:
         def result = buildTask( 'npmInstall' )
 
