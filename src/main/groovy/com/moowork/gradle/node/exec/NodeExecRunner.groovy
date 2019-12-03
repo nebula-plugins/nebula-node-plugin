@@ -21,14 +21,5 @@ class NodeExecRunner
         }
         return run( exec, this.arguments )
     }
-
-    @Override
-    protected String computeAdditionalBinPath()
-    {
-        if (this.ext.download)
-        {
-            return this.variant.nodeBinDir.getAbsolutePath()
-        }
-        return null
-    }
+    
 }

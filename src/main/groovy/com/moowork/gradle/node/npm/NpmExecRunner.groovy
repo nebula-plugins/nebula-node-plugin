@@ -51,16 +51,4 @@ class NpmExecRunner
     protected String getCommandScript() {
         return this.variant.npmScriptFile
     }
-
-    @Override
-    protected String computeAdditionalBinPath()
-    {
-        if (ext.download)
-        {
-            def npmBinDir = this.variant.npmBinDir.getAbsolutePath();
-            def nodeBinDir = this.variant.nodeBinDir.getAbsolutePath();
-            return npmBinDir + File.pathSeparator + nodeBinDir
-        }
-        return null
-    }
 }
