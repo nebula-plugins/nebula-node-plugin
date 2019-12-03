@@ -17,7 +17,7 @@ abstract class ExecRunner
 
     def Map<String, ?> environment = [:]
 
-    def File workingDir
+    def Object workingDir
 
     @Internal
     def List<?> arguments = []
@@ -33,7 +33,7 @@ abstract class ExecRunner
     }
 
     @Internal
-    File getWorkingDir()
+    Object getWorkingDir()
     {
         return workingDir
     }
@@ -54,14 +54,15 @@ abstract class ExecRunner
     {
         def realExec = exec
         def realArgs = args
-        def execEnvironment = computeExecEnvironment()
-        def execWorkingDir = computeWorkingDir()
         return this.project.exec( {
             it.executable = realExec
             it.args = realArgs
-            it.environment = execEnvironment
+            it.environment = this.environment
             it.ignoreExitValue = this.ignoreExitValue
-            it.workingDir = execWorkingDir
+            if ( this.workingDir != null )
+            {
+                it.workingDir = this.workingDir
+            }
 
             if ( this.execOverrides != null )
             {
@@ -70,36 +71,7 @@ abstract class ExecRunner
         } )
     }
 
-    private File computeWorkingDir()
-    {
-        File workingDir = this.workingDir != null ? this.workingDir : this.project.node.nodeModulesDir
-        if (!workingDir.exists())
-        {
-            workingDir.mkdirs()
-        }
-        return workingDir
-    }
 
-    private Map<Object, Object> computeExecEnvironment()
-    {
-        def environment = [:]
-        environment << System.getenv()
-        environment << this.environment
-        String path = computeAdditionalBinPath()
-        if (path != null)
-        {
-            // Take care of Windows environments that may contain "Path" OR "PATH" - both existing
-            // possibly (but not in parallel as of now)
-            if (environment['Path'] != null) {
-                environment['Path'] = path + File.pathSeparator + environment['Path']
-            } else {
-                environment['PATH'] = path + File.pathSeparator + environment['PATH']
-            }
-        }
-        return environment
-    }
-
-    protected abstract String computeAdditionalBinPath()
 
     public final ExecResult execute()
     {
