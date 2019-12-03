@@ -163,33 +163,4 @@ class NpmRule_integTest
         fileExists( 'parent2.txt' )
     }
 
-    def 'Custom workingDir'()
-    {
-        given:
-        writeBuild( '''
-            plugins {
-                id 'nebula.node'
-            }
-            node {
-                npmVersion = "6.1.0"
-                download = true
-                nodeModulesDir = file("frontend")
-            }
-        ''' )
-        writeFile( 'frontend/package.json', """{
-            "name": "example",
-            "dependencies": {},
-            "scripts": {
-                "whatVersion": "npm run --version"
-            }
-        }""" )
-        writeEmptyPackageLockJson( 'frontend/package-lock.json' )
-
-        when:
-        def result = build( 'npm_run_whatVersion' )
-
-        then:
-        result.output =~ /\n6\.1\.0\n/
-        result.task( ':npm_run_whatVersion' ).outcome == TaskOutcome.SUCCESS
-    }
 }
