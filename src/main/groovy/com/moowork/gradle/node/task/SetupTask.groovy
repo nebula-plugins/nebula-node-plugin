@@ -1,22 +1,22 @@
 package com.moowork.gradle.node.task
 
 import com.moowork.gradle.node.NodeExtension
+import com.moowork.gradle.node.NodePlugin
+import com.moowork.gradle.node.util.BackwardsCompat
 import com.moowork.gradle.node.variant.Variant
 import org.gradle.api.DefaultTask
-import org.gradle.api.artifacts.repositories.ArtifactRepository
 import org.gradle.api.artifacts.repositories.IvyArtifactRepository
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
-import org.gradle.util.GradleVersion
 
 import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
 class SetupTask
-    extends DefaultTask
+        extends DefaultTask
 {
     public final static String NAME = 'nodeSetup'
 
@@ -24,13 +24,10 @@ class SetupTask
 
     protected Variant variant
 
-    private IvyArtifactRepository repo
-
-    private List<ArtifactRepository> allRepos;
-
     SetupTask()
     {
-        this.group = 'Node'
+
+        this.group = NodePlugin.NODE_GROUP
         this.description = 'Download and install a local node/npm version.'
         this.enabled = false
     }
@@ -69,7 +66,7 @@ class SetupTask
     void exec()
     {
         configureIfNeeded()
-        addRepository()
+        addRepositoryIfNeeded()
 
         if ( this.variant.exeDependency )
         {
@@ -79,7 +76,6 @@ class SetupTask
         deleteExistingNode()
         unpackNodeArchive()
         setExecutableFlag()
-        restoreRepositories()
     }
 
     private void copyNodeExe()
@@ -136,9 +132,12 @@ class SetupTask
             Path npm = Paths.get( variant.nodeBinDir.path, 'npm' )
             if ( Files.deleteIfExists( npm ) )
             {
-                Files.createSymbolicLink(
-                        npm,
-                        variant.nodeBinDir.toPath().relativize(Paths.get(variant.npmScriptFile)))
+                Files.createSymbolicLink( npm, Paths.get( variant.npmScriptFile ) )
+            }
+            Path npx = Paths.get( variant.nodeBinDir.path, 'npx' )
+            if ( Files.deleteIfExists( npx ) )
+            {
+                Files.createSymbolicLink( npx, Paths.get( variant.npxScriptFile ) )
             }
         }
     }
@@ -171,41 +170,31 @@ class SetupTask
         return conf.resolve().iterator().next();
     }
 
-    private void addRepository()
-    {
-        this.allRepos = new ArrayList<>()
-        this.allRepos.addAll( this.project.repositories )
-        this.project.repositories.clear()
+    private void addRepositoryIfNeeded() {
+        if ( this.config.distBaseUrl != null ) {
+            addRepository this.config.distBaseUrl
+        }
+    }
 
-        def distUrl = this.config.distBaseUrl
-        if(GradleVersion.current().baseVersion >= GradleVersion.version('5.0').baseVersion) {
-            this.repo = this.project.repositories.ivy {
-                url distUrl
+    private void addRepository( String distUrl ) {
+        this.project.repositories.ivy {
+            url distUrl
+            if (BackwardsCompat.usePatternLayout()) {
                 patternLayout {
                     artifact 'v[revision]/[artifact](-v[revision]-[classifier]).[ext]'
                     ivy 'v[revision]/ivy.xml'
                 }
-                metadataSources {
-                    artifact()
-                }
-            }
-        } else {
-            this.repo = this.project.repositories.ivy {
-                url distUrl
+            } else {
                 layout 'pattern', {
                     artifact 'v[revision]/[artifact](-v[revision]-[classifier]).[ext]'
                     ivy 'v[revision]/ivy.xml'
                 }
+            }
+            if (BackwardsCompat.useMetadataSourcesRepository()) {
                 metadataSources {
                     artifact()
                 }
             }
         }
-    }
-
-    private void restoreRepositories()
-    {
-        this.project.repositories.clear();
-        this.project.repositories.addAll( this.allRepos );
     }
 }
