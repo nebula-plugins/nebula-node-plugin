@@ -1,10 +1,12 @@
 package com.moowork.gradle.node.npm
 
 import com.moowork.gradle.node.NodeExtension
+import com.moowork.gradle.node.NodePlugin
 import com.moowork.gradle.node.task.SetupTask
 import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
+import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.OutputDirectory
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecResult
@@ -13,7 +15,7 @@ import org.gradle.process.ExecResult
  * npm install that only gets executed if gradle decides so.
  **/
 class NpmSetupTask
-    extends DefaultTask
+        extends DefaultTask
 {
     public final static String NAME = 'npmSetup'
 
@@ -21,7 +23,6 @@ class NpmSetupTask
 
     private NodeExtension config
 
-    @Internal
     protected List<?> args = []
 
     private ExecResult result
@@ -30,7 +31,7 @@ class NpmSetupTask
     {
         dependsOn( SetupTask.NAME )
 
-        this.group = 'Node'
+        this.group = NodePlugin.NODE_GROUP
         this.description = 'Setup a specific version of npm to be used by the build.'
         this.enabled = false
 
@@ -38,7 +39,7 @@ class NpmSetupTask
     }
 
     @Input
-    Set<String> getInput()
+    Set<Object> getInput()
     {
         def set = new HashSet<>()
         set.add( getConfig().download )
@@ -77,6 +78,7 @@ class NpmSetupTask
         return getConfig().variant
     }
 
+    @Input
     List<?> getArgs()
     {
         return this.args
@@ -97,6 +99,12 @@ class NpmSetupTask
         this.runner.execOverrides = closure
     }
 
+    @Nested
+    NpmExecRunner getRunner()
+    {
+        return runner
+    }
+
     @TaskAction
     void exec()
     {
@@ -109,8 +117,27 @@ class NpmSetupTask
         if ( !npmVersion.isEmpty() )
         {
             logger.debug( "Setting npmVersion to ${npmVersion}" )
-            setArgs( ['install', '--global', '--no-save', '--prefix', getVariant().npmDir, "npm@${npmVersion}"] )
+            setArgs(['install', '--global', '--no-save'] + proxySettings() + ['--prefix', getVariant().npmDir.absolutePath, "npm@${npmVersion}"])
             enabled = true
         }
     }
+
+    static List<String> proxySettings() {
+        for(String[] proxySettings : [['http', '--proxy'], ['https', '--https-proxy']]) {
+            String proxyHost = System.getProperty(proxySettings[0] + '.proxyHost')
+            String proxyPort = System.getProperty(proxySettings[0] + '.proxyPort')
+            if (proxyHost != null && proxyPort != null) {
+                proxyHost = proxyHost.replaceAll('^https?://', '')
+                String proxyUser = System.getProperty(proxySettings[0] + '.proxyUser')
+                String proxyPassword = System.getProperty(proxySettings[0] + '.proxyPassword')
+                if (proxyUser != null && proxyPassword != null) {
+                    return ["${proxySettings[1]} ${proxySettings[0]}://$proxyUser:$proxyPassword@$proxyHost:$proxyPort"]
+                } else {
+                    return ["${proxySettings[1]} ${proxySettings[0]}://$proxyHost:$proxyPort"]
+                }
+            }
+        }
+        return []
+    }
+
 }
