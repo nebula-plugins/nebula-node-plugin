@@ -89,7 +89,7 @@ class SetupTask
 
     private void deleteExistingNode()
     {
-        this.project.delete( getNodeDir().parent )
+        this.project.delete( getNodeDir() )
     }
 
     private void unpackNodeArchive()
