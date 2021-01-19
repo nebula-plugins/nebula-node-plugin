@@ -32,6 +32,15 @@ class SetupTask extends DefaultTask {
         this.enabled = false
     }
 
+    void setDistUrl(String url) {
+        this.distBaseUrl = url
+    }
+
+    @Internal
+    String getDistUrl() {
+        return this.distBaseUrl
+    }
+
     @Input
     public Set<String> getInput() {
         configureIfNeeded()
