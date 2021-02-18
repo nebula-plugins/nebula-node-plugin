@@ -16,6 +16,7 @@ class YarnInstallTask
 
     public YarnInstallTask()
     {
+        super(true)
         this.group = 'Node'
         this.description = 'Install node packages using Yarn.'
         setYarnCommand( '' )
