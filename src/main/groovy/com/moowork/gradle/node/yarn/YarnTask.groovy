@@ -5,6 +5,8 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecResult
 
+import javax.inject.Inject
+
 class YarnTask
     extends DefaultTask
 {
@@ -16,22 +18,39 @@ class YarnTask
 
     private String[] yarnCommand
 
-    public YarnTask()
+    @Inject
+    public YarnTask() {
+        this(false)
+    }
+
+    public YarnTask(boolean afterEvaluateConfiguration)
     {
         this.runner = new YarnExecRunner( this.project )
         dependsOn( YarnSetupTask.NAME )
 
-        this.project.afterEvaluate {
-            if ( !this.runner.workingDir )
-            {
+        def initWorkDir = {
+            if (!this.runner.workingDir) {
                 def workingDir = this.project.node.nodeModulesDir
-                setWorkingDir( workingDir )
+                setWorkingDir(workingDir)
             }
 
-            if ( !this.runner.workingDir.exists() )
-            {
+            if (!this.runner.workingDir.exists()) {
                 this.runner.workingDir.mkdirs();
             }
+        }
+
+        //This class is used from different contexts.
+        //1) it is a parent for a usually created task - in that case we need to initialize
+        //   working directory after evaluation so we can capture customizations
+        //2) task created by a rule. In that case we are already after evaluation and we don't need to
+        //   wait with configuration. Gradle 7+ actually fails if you invoke after evaluate
+        //   if a project is past that phase
+        if (afterEvaluateConfiguration) {
+            this.project.afterEvaluate {
+                initWorkDir()
+            }
+        } else {
+            initWorkDir()
         }
     }
 
