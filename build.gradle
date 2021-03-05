@@ -17,6 +17,13 @@ dependencies {
     testImplementation 'com.github.stefanbirkner:system-rules:1.19.0'
 }
 
+contacts {
+    'nebula-plugins-oss@netflix.com' {
+        moniker 'Nebula Plugins Maintainers'
+        github 'nebula-plugins'
+    }
+}
+
 gradlePlugin {
     plugins {
         nebulaGrunt {
