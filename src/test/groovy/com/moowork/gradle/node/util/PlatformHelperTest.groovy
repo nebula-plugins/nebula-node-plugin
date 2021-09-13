@@ -39,16 +39,4 @@ class PlatformHelperTest
         'SunOS'     | 'x86'    | 'sunos'   | 'x86'  | false
         'SunOS'     | 'x86_64' | 'sunos'   | 'x64'  | false
     }
-
-    def "throw exception if unsupported os"()
-    {
-        given:
-        this.props.setProperty( "os.name", 'Nonsense' )
-
-        when:
-        this.helper.getOsName()
-
-        then:
-        thrown( IllegalArgumentException )
-    }
 }
