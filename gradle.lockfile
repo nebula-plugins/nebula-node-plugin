@@ -3,7 +3,7 @@
 # This file is expected to be part of source control.
 cglib:cglib-nodep:3.2.4=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 com.github.stefanbirkner:system-rules:1.19.0=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
-com.netflix.nebula:nebula-test:10.0.1=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
+com.netflix.nebula:nebula-test:10.1.0=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 commons-io:commons-io:1.3.2=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 junit:junit-dep:4.11=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 junit:junit:4.13=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
