@@ -1,6 +1,6 @@
 
 plugins {
-    id 'nebula.plugin-plugin' version '16.0.1'
+    id 'nebula.plugin-plugin' version '16.1.0'
 }
 
 repositories {
