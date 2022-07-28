@@ -69,3 +69,10 @@ pluginBundle {
         }
     }
 }
+
+tasks.withType(Test) {
+    if (JavaVersion.current().isCompatibleWith(JavaVersion.VERSION_17)) {
+        // Necessary to run system-rules that uses reflection to modify system properties and/or env variables
+        jvmArgs("--add-opens", "java.base/java.util=ALL-UNNAMED", "--add-opens", "java.base/java.lang=ALL-UNNAMED")
+    }
+}
