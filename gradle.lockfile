@@ -1,12 +1,13 @@
-# This is a Gradle generated file for dependency locking.
+# This is a file for dependency locking, migrated from Nebula locks.
 # Manual edits can break the build and are not advised.
 # This file is expected to be part of source control.
 cglib:cglib-nodep:3.2.4=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
-com.github.stefanbirkner:system-rules:1.19.0=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 com.netflix.nebula:nebula-test:10.2.0=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 commons-io:commons-io:1.3.2=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
-junit:junit-dep:4.11=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
+empty=annotationProcessor,compileClasspath,integTestAnnotationProcessor,runtimeClasspath,testAnnotationProcessor
 junit:junit:4.13.2=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
+net.bytebuddy:byte-buddy-agent:1.11.13=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
+net.bytebuddy:byte-buddy:1.11.13=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.apache.commons:commons-io:1.3.2=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.apiguardian:apiguardian-api:1.1.2=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.codehaus.groovy:groovy:3.0.9=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
@@ -14,8 +15,11 @@ org.hamcrest:hamcrest-core:1.3=integTestCompileClasspath,integTestRuntimeClasspa
 org.hamcrest:hamcrest:2.2=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.junit.platform:junit-platform-commons:1.8.1=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.junit.platform:junit-platform-engine:1.8.1=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
-org.objenesis:objenesis:2.4=integTestRuntimeClasspath,testRuntimeClasspath
+org.mockito:mockito-core:3.12.4=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
+org.mockito:mockito-inline:3.12.4=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
+org.objenesis:objenesis:3.2=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.opentest4j:opentest4j:1.2.0=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.spockframework:spock-core:2.1-M2-groovy-3.0=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
 org.spockframework:spock-junit4:2.1-M2-groovy-3.0=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
-empty=annotationProcessor,compileClasspath,integTestAnnotationProcessor,runtimeClasspath,testAnnotationProcessor
+uk.org.webcompere:system-stubs-core:2.0.1=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
+uk.org.webcompere:system-stubs-junit4:2.0.1=integTestCompileClasspath,integTestRuntimeClasspath,testCompileClasspath,testRuntimeClasspath
