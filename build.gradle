@@ -1,6 +1,6 @@
 
 plugins {
-    id 'nebula.plugin-plugin' version '16.3.0'
+    id 'nebula.plugin-plugin' version '17.0.0'
 }
 
 repositories {
@@ -47,25 +47,9 @@ pluginBundle {
     website = 'https://github.com/nebula-plugins/nebula-node-plugin'
     vcsUrl = 'https://github.com/nebula-plugins/nebula-node-plugin.git'
     description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
-
-    plugins {
-        nebulaGrunt {
-            id = 'nebula.grunt'
-            displayName = 'Nebula Grunt Plugin'
-            description = 'Nebula Grunt Plugin'
-            tags = ['nebula']
-        }
-        nebulaGulp {
-            id = 'nebula.gulp'
-            displayName = 'Nebula Gulp Plugin'
-            description = 'Nebula Gulp Plugin'
-            tags = ['nebula']
-        }
-        nebulaNode {
-            id = 'nebula.node'
-            displayName = 'Nebula Node Plugin'
-            description = 'Nebula Node Plugin'
-            tags = ['nebula']
-        }
-    }
+    pluginTags = [
+            nebulaGrunt: ['nebula', 'grunt'],
+            nebulaGulp: ['nebula', 'gulp'],
+            nebulaNode: ['nebula', 'node']
+    ]
 }
