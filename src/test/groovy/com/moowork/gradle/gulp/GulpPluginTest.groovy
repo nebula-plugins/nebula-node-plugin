@@ -8,7 +8,7 @@ class GulpPluginTest
     def 'check default tasks'()
     {
         when:
-        this.project.apply plugin: 'nebula.gulp'
+        this.project.apply plugin: 'com.netflix.nebula.gulp'
         this.project.evaluate()
 
         then:

@@ -8,7 +8,7 @@ class NodeExtensionTest
     def "check default values for extension"()
     {
         when:
-        this.project.apply plugin: 'nebula.node'
+        this.project.apply plugin: 'com.netflix.nebula.node'
         def ext = NodeExtension.get( this.project )
 
         then:

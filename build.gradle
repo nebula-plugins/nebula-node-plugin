@@ -1,6 +1,6 @@
 
 plugins {
-    id 'nebula.plugin-plugin' version '17.0.0'
+    id 'com.netflix.nebula.plugin-plugin' version '19.0.1'
 }
 
 repositories {
@@ -23,19 +23,45 @@ contacts {
 
 gradlePlugin {
     plugins {
-        nebulaGrunt {
+        nebulaGruntLegacy {
             id = 'nebula.grunt'
+            displayName = 'nebula.grunt'
+            description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
             implementationClass = 'com.moowork.gradle.grunt.GruntPlugin'
         }
 
-        nebulaGulp {
+        nebulaGulpLegacy {
             id = 'nebula.gulp'
+            displayName = 'nebula.gulp'
+            description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
             implementationClass = 'com.moowork.gradle.gulp.GulpPlugin'
         }
 
-        nebulaNode {
+        nebulaNodeLegacy {
             id = 'nebula.node'
+            displayName = 'nebula.node'
+            description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
             implementationClass = 'com.moowork.gradle.node.NodePlugin'
+        }
+        nebulaGrunt {
+            id = 'com.netflix.nebula.grunt'
+            displayName = 'com.netflix.nebula.grunt'
+            implementationClass = 'com.moowork.gradle.grunt.GruntPlugin'
+            description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
+        }
+
+        nebulaGulp {
+            id = 'com.netflix.nebula.gulp'
+            displayName = 'com.netflix.nebula.gulp'
+            implementationClass = 'com.moowork.gradle.gulp.GulpPlugin'
+            description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
+        }
+
+        nebulaNode {
+            id = 'com.netflix.nebula.node'
+            displayName = 'com.netflix.nebula.node'
+            implementationClass = 'com.moowork.gradle.node.NodePlugin'
+            description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
         }
 
     }
@@ -50,6 +76,9 @@ pluginBundle {
     pluginTags = [
             nebulaGrunt: ['nebula', 'grunt'],
             nebulaGulp: ['nebula', 'gulp'],
-            nebulaNode: ['nebula', 'node']
+            nebulaNode: ['nebula', 'node'],
+            nebulaGruntLegacy: ['nebula', 'grunt'],
+            nebulaGulpLegacy: ['nebula', 'gulp'],
+            nebulaNodeLegacy: ['nebula', 'node']
     ]
 }
