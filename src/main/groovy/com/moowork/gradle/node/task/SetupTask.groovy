@@ -5,6 +5,7 @@ import com.moowork.gradle.node.NodePlugin
 import com.moowork.gradle.node.util.BackwardsCompat
 import com.moowork.gradle.node.variant.Variant
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.OutputDirectory
@@ -14,6 +15,7 @@ import java.nio.file.Files
 import java.nio.file.Path
 import java.nio.file.Paths
 
+@CacheableTask
 class SetupTask extends DefaultTask {
 
     public final static String NAME = 'nodeSetup'

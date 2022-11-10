@@ -1,7 +1,9 @@
 package com.moowork.gradle.grunt
 
 import com.moowork.gradle.node.npm.NpmTask
+import org.gradle.api.tasks.CacheableTask
 
+@CacheableTask
 class GruntInstallTask
     extends NpmTask
 {

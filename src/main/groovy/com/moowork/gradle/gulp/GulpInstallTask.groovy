@@ -1,7 +1,9 @@
 package com.moowork.gradle.gulp
 
 import com.moowork.gradle.node.npm.NpmTask
+import org.gradle.api.tasks.CacheableTask
 
+@CacheableTask
 class GulpInstallTask
     extends NpmTask
 {

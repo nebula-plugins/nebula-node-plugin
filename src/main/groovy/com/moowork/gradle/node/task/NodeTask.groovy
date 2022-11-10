@@ -5,7 +5,9 @@ import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecResult
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault
 class NodeTask
     extends DefaultTask
 {

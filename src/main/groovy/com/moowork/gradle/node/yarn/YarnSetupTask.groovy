@@ -1,12 +1,14 @@
 package com.moowork.gradle.node.yarn
 
 import com.moowork.gradle.node.npm.NpmSetupTask
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.OutputDirectory
 
 /**
  * Setup a specific version of Yarn to be used by the build.
  **/
+@CacheableTask
 class YarnSetupTask
     extends NpmSetupTask
 {

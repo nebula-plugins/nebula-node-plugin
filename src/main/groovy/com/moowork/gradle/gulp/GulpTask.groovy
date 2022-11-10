@@ -2,7 +2,9 @@ package com.moowork.gradle.gulp
 
 import com.moowork.gradle.node.task.NodeTask
 import org.gradle.api.GradleException
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault
 class GulpTask
     extends NodeTask
 {

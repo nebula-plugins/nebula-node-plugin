@@ -2,7 +2,9 @@ package com.moowork.gradle.grunt
 
 import com.moowork.gradle.node.task.NodeTask
 import org.gradle.api.GradleException
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault
 class GruntTask
     extends NodeTask
 {

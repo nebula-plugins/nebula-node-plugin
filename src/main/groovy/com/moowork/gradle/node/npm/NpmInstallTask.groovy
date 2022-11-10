@@ -1,6 +1,7 @@
 package com.moowork.gradle.node.npm
 
 import com.moowork.gradle.node.NodePlugin
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputFile
@@ -12,6 +13,7 @@ import com.moowork.gradle.node.NodeExtension
 
 /**
  * npm install that only gets executed if gradle decides so.*/
+@CacheableTask
 class NpmInstallTask
         extends NpmTask
 {

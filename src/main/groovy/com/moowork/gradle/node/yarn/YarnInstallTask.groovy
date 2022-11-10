@@ -1,6 +1,7 @@
 package com.moowork.gradle.node.yarn
 
 import com.moowork.gradle.node.NodeExtension
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.InputFile
 import org.gradle.api.tasks.Optional
 import org.gradle.api.tasks.OutputDirectory
@@ -9,6 +10,7 @@ import org.gradle.api.tasks.PathSensitivity
 
 /**
  * yarn install that only gets executed if gradle decides so.*/
+@CacheableTask
 class YarnInstallTask
     extends YarnTask
 {

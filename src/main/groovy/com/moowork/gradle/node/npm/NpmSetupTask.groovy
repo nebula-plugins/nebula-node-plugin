@@ -4,6 +4,7 @@ import com.moowork.gradle.node.NodeExtension
 import com.moowork.gradle.node.NodePlugin
 import com.moowork.gradle.node.task.SetupTask
 import org.gradle.api.DefaultTask
+import org.gradle.api.tasks.CacheableTask
 import org.gradle.api.tasks.Input
 import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Nested
@@ -14,6 +15,7 @@ import org.gradle.process.ExecResult
 /**
  * npm install that only gets executed if gradle decides so.
  **/
+@CacheableTask
 class NpmSetupTask
         extends DefaultTask
 {

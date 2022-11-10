@@ -7,7 +7,9 @@ import org.gradle.api.tasks.Internal
 import org.gradle.api.tasks.Nested
 import org.gradle.api.tasks.TaskAction
 import org.gradle.process.ExecResult
+import org.gradle.work.DisableCachingByDefault
 
+@DisableCachingByDefault
 class NpxTask
         extends DefaultTask
 {
