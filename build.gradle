@@ -1,6 +1,6 @@
 
 plugins {
-    id 'com.netflix.nebula.plugin-plugin' version '19.0.2'
+    id 'com.netflix.nebula.plugin-plugin' version '20.0.0'
 }
 
 repositories {
@@ -28,6 +28,7 @@ gradlePlugin {
             displayName = 'nebula.grunt'
             description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
             implementationClass = 'com.moowork.gradle.grunt.GruntPlugin'
+            tags.set(['nebula', 'grunt'])
         }
 
         nebulaGulpLegacy {
@@ -35,6 +36,7 @@ gradlePlugin {
             displayName = 'nebula.gulp'
             description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
             implementationClass = 'com.moowork.gradle.gulp.GulpPlugin'
+            tags.set(['nebula', 'gulp'])
         }
 
         nebulaNodeLegacy {
@@ -42,12 +44,14 @@ gradlePlugin {
             displayName = 'nebula.node'
             description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
             implementationClass = 'com.moowork.gradle.node.NodePlugin'
+            tags.set(['nebula', 'node'])
         }
         nebulaGrunt {
             id = 'com.netflix.nebula.grunt'
             displayName = 'com.netflix.nebula.grunt'
             implementationClass = 'com.moowork.gradle.grunt.GruntPlugin'
             description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
+            tags.set(['nebula', 'grunt'])
         }
 
         nebulaGulp {
@@ -55,6 +59,7 @@ gradlePlugin {
             displayName = 'com.netflix.nebula.gulp'
             implementationClass = 'com.moowork.gradle.gulp.GulpPlugin'
             description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
+            tags.set(['nebula', 'gulp'])
         }
 
         nebulaNode {
@@ -62,6 +67,7 @@ gradlePlugin {
             displayName = 'com.netflix.nebula.node'
             implementationClass = 'com.moowork.gradle.node.NodePlugin'
             description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
+            tags.set(['nebula', 'node'])
         }
 
     }
@@ -69,18 +75,5 @@ gradlePlugin {
 
 description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
 
-pluginBundle {
-    website = 'https://github.com/nebula-plugins/nebula-node-plugin'
-    vcsUrl = 'https://github.com/nebula-plugins/nebula-node-plugin.git'
-    description = 'Plugins to ease use of Node tools (Node, Grunt, Gulp)'
-    pluginTags = [
-            nebulaGrunt: ['nebula', 'grunt'],
-            nebulaGulp: ['nebula', 'gulp'],
-            nebulaNode: ['nebula', 'node'],
-            nebulaGruntLegacy: ['nebula', 'grunt'],
-            nebulaGulpLegacy: ['nebula', 'gulp'],
-            nebulaNodeLegacy: ['nebula', 'node']
-    ]
-}
 
 
