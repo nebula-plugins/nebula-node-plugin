@@ -45,7 +45,7 @@ if (isPropertyEnabled("notExistingCommand")) {
 }
 
 if (isPropertyEnabled("customWorkingDir")) {
-    pwd.workingDir = file("${project.buildDir}/customWorkingDirectory/")
+    pwd.workingDir = file("${project.layout.buildDirectory.getAsFile().get()}/customWorkingDirectory/")
 }
 
 def isPropertyEnabled(name) {
