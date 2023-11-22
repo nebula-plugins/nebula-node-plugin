@@ -1,87 +1,88 @@
-package com.moowork.gradle.node.npm
+package com.moowork.gradle.node.yarn
 
 import com.moowork.gradle.AbstractIntegTest
 import org.gradle.testkit.runner.TaskOutcome
 
-class NpmInstall_integTest
-    extends AbstractIntegTest
-{
-    def 'install packages with npm'()
-    {
+class YarnInstallIntegrationSpec extends AbstractIntegTest {
+    def 'install packages with yarn'() {
         given:
-        writeBuild( '''
+        writeBuild('''
             plugins {
                 id 'nebula.node'
             }
 
             node {
+                yarnVersion = "1.15.2"
                 download = true
                 workDir = file('build/node')
+                yarnWorkDir = file('build/yarn')
             }
-        ''' )
+        ''')
         writeEmptyPackageJson()
-        writeFile('package-lock.json', '')
+        writeFile("yarn.lock", "")
 
         when:
-        def result = buildTask( 'npmInstall' )
+        def result = buildTask('yarn')
 
         then:
         result.outcome == TaskOutcome.SUCCESS
     }
 
-    def 'install packages with npm and postinstall task requiring npm and node'()
-    {
+    def 'install packages with yarn and and postinstall task requiring node and yarn'() {
         given:
-        writeBuild( '''
+        writeBuild('''
             plugins {
                 id 'nebula.node'
             }
             node {
+                yarnVersion = "1.15.2"
                 download = true
                 workDir = file('build/node')
+                yarnWorkDir = file('build/yarn')
             }
-        ''' )
-        writePackageJson( """ {
+        ''')
+        writePackageJson(""" {
             "name": "example",
             "dependencies": {},
             "versionOutput" : "node --version",
-            "postinstall" : "npm run versionOutput"
+            "postinstall" : "yarn run versionOutput"
         }
-        """ )
-        writeEmptyPackageLockJson()
+        """)
+        writeFile("yarn.lock", "")
 
         when:
-        def result = buildTask( 'npmInstall' )
+        def result = buildTask('yarn')
 
         then:
         result.outcome == TaskOutcome.SUCCESS
     }
 
-    def 'install packages with npm in different directory'()
-    {
+    def 'install packages with yarn in different directory'() {
         given:
-        writeBuild( '''
+        writeBuild('''
             plugins {
                 id 'nebula.node'
             }
 
             node {
+                yarnVersion = "1.15.2"
                 download = true
                 workDir = file('build/node')
+                yarnWorkDir = file('build/yarn')
                 nodeProjectDir = file('subdirectory')
             }
-        ''' )
-        writeFile( 'subdirectory/package.json', """{
+        ''')
+        writeFile('subdirectory/package.json', """{
             "name": "example",
             "dependencies": {
             }
-        }""" )
-        writeEmptyPackageLockJson( 'subdirectory/package-lock.json' )
+        }""")
+        writeFile("subdirectory/yarn.lock", "")
 
         when:
-        def result = build( 'npmInstall' )
+        def result = buildTask('yarn')
 
         then:
-        result.task( ':npmInstall' ).outcome == TaskOutcome.SUCCESS
+        result.outcome == TaskOutcome.SUCCESS
     }
 }

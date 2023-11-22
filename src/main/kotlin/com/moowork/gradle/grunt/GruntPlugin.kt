@@ -14,7 +14,7 @@ class GruntPlugin : Plugin<Project> {
         project.plugins.apply(NodePlugin::class.java)
         val gulpExtension = GruntExtension.create(project)
         val nodeExtension = project.extensions.getByType(NodeExtension::class.java)
-        val gruntInstall =project.tasks.register(GRUNT_INSTALL_NAME, GruntInstallTask::class.java)
+        project.tasks.register(GRUNT_INSTALL_NAME, GruntInstallTask::class.java)
 
         project.tasks.addRule("Pattern: \"grunt_<task>\": Executes a named gulp task.") { taskName ->
             if (taskName.startsWith("grunt_")) {

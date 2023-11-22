@@ -3,8 +3,7 @@ package com.moowork.gradle.node.npm
 import com.moowork.gradle.AbstractIntegTest
 import org.gradle.testkit.runner.TaskOutcome
 
-class NpxTask_integTest
-        extends AbstractIntegTest {
+class NpxTaskIntegrationSpec extends AbstractIntegTest {
 
     def 'execute npx command with a package.json file and check inputs up-to-date detection'() {
         given:

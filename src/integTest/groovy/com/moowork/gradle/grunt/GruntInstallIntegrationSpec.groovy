@@ -1,26 +1,23 @@
-package com.moowork.gradle.gulp
+package com.moowork.gradle.grunt
 
 import com.moowork.gradle.AbstractIntegTest
 import org.gradle.testkit.runner.TaskOutcome
 
-class GulpInstall_integTest
-    extends AbstractIntegTest
-{
-    def 'gulp install'()
-    {
+class GruntInstallIntegrationSpec extends AbstractIntegTest {
+    def 'grunt install'() {
         given:
-        writeBuild( '''
+        writeBuild('''
             plugins {
-                id 'nebula.gulp'
+                id 'nebula.grunt'
             }
 
             node {
                 download = true
             }
-        ''' )
+        ''')
 
         when:
-        def result = buildTask( 'installGulp' )
+        def result = buildTask('installGrunt')
 
         then:
         result.outcome == TaskOutcome.SUCCESS
