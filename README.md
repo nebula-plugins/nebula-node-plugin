@@ -26,6 +26,14 @@ It's actually 3 plugins in one:
 
 This was taken from [srs/gradle-node-plugin](https://github.com/srs/gradle-node-plugin) due to lack of support/activity and the need to support Gradle 6.x
 
+Now it is build in top of [gradle-node-plugin](https://github.com/node-gradle/gradle-node-plugin). We recommend using that plugin instead. 
+
+This plugin exists for the following reasons:
+
+1. Backwards compatibility in the Netflix ecosystem 
+2. Gulp and Grunt support
+
+New/modern projects should use `gradle-node-plugin` instead.
 
 ## License
 

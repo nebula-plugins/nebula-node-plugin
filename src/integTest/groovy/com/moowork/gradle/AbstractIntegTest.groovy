@@ -9,8 +9,7 @@ import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
 
 abstract class AbstractIntegTest
-    extends Specification
-{
+        extends Specification {
     @Rule
     final TemporaryFolder temporaryFolder = new TemporaryFolder();
 
@@ -18,122 +17,113 @@ abstract class AbstractIntegTest
 
     def File buildFile;
 
-    def setup()
-    {
+    def setup() {
         this.projectDir = this.temporaryFolder.root;
-        this.buildFile = createFile( 'build.gradle' )
+        this.buildFile = createFile('build.gradle')
+        // Enable configuration cache :)
+        new File(projectDir, 'gradle.properties') << '''org.gradle.configuration-cache=true'''.stripIndent()
     }
 
-    protected final GradleRunner newRunner( final String... args )
-    {
+    void disableConfigurationCache() {
+        def propertiesFile = new File(projectDir, 'gradle.properties')
+        if(propertiesFile.exists()) {
+            propertiesFile.delete()
+        }
+        propertiesFile.createNewFile()
+        propertiesFile << '''org.gradle.configuration-cache=false'''.stripIndent()
+    }
+
+    protected final GradleRunner newRunner(final String... args) {
         return GradleRunner.create().
-            withProjectDir( this.projectDir ).
-            withArguments( args ).
-            withPluginClasspath();
+                withProjectDir(this.projectDir).
+                withArguments(args).
+                withPluginClasspath()
     }
 
-    protected final BuildResult build( final String... args )
-    {
-        return newRunner( args ).build();
+    protected final BuildResult build(final String... args) {
+        return newRunner(args).build();
     }
 
-    protected final BuildResult buildAndFail( final String... args )
-    {
-        return newRunner( args ).buildAndFail();
+    protected final BuildResult buildAndFail(final String... args) {
+        return newRunner(args).buildAndFail();
     }
 
-    protected final BuildTask buildTask( final String task )
-    {
-        return build( task ).task( ':' + task );
+    protected final BuildTask buildTask(final String task) {
+        return build(task).task(':' + task);
     }
 
-    protected final File createFile( final String name )
-    {
-        return new File( this.temporaryFolder.getRoot(), name );
+    protected final File createFile(final String name) {
+        return new File(this.temporaryFolder.getRoot(), name);
     }
 
-    protected final void writeFile( final String name, final String text )
-    {
-        File file = createFile( name )
+    protected final void writeFile(final String name, final String text) {
+        File file = createFile(name)
         file.parentFile.mkdirs()
         file << text
     }
 
-    protected final void writePackageJson( final String text )
-    {
-        writeFile( 'package.json', text )
+    protected final void writePackageJson(final String text) {
+        writeFile('package.json', text)
     }
 
-    protected final void writeEmptyPackageLockJson()
-    {
-        writeEmptyPackageLockJson( 'package-lock.json' )
+    protected final void writeEmptyPackageLockJson() {
+        writeEmptyPackageLockJson('package-lock.json')
     }
 
-    protected final void writeEmptyPackageLockJson( final String name )
-    {
-        writeFile( name, """ {
+    protected final void writeEmptyPackageLockJson(final String name) {
+        writeFile(name, """ {
             "name": "example",
             "lockfileVersion": 1
         }
-        """ )
+        """)
     }
 
-    protected final void writeEmptyPackageJson()
-    {
-        writePackageJson( """ {
+    protected final void writeEmptyPackageJson() {
+        writePackageJson(""" {
             "name": "example",
             "dependencies": {}
         }
-        """ )
+        """)
 
         writeEmptyPackageLockJson()
     }
 
-    protected final void writeBuild( final String text )
-    {
+    protected final void writeBuild(final String text) {
         this.buildFile << text
     }
 
-    protected final File directory( String path, File baseDir = getProjectDir() )
-    {
-        return new File( baseDir, path ).with {
+    protected final File directory(String path, File baseDir = getProjectDir()) {
+        return new File(baseDir, path).with {
             mkdirs()
             it
         }
     }
 
-    protected final File file( String path, File baseDir = getProjectDir() )
-    {
-        def splitted = path.split( '/' )
-        def directory = splitted.size() > 1 ? directory( splitted[0..-2].join( '/' ), baseDir ) : baseDir
-        def file = new File( directory, splitted[-1] )
+    protected final File file(String path, File baseDir = getProjectDir()) {
+        def splitted = path.split('/')
+        def directory = splitted.size() > 1 ? directory(splitted[0..-2].join('/'), baseDir) : baseDir
+        def file = new File(directory, splitted[-1])
         file.createNewFile()
         return file
     }
 
-    protected void copyResources( String srcDir, String destination )
-    {
+    protected void copyResources(String srcDir, String destination) {
         ClassLoader classLoader = getClass().getClassLoader();
-        URL resource = classLoader.getResource( srcDir );
-        if ( resource == null )
-        {
-            throw new RuntimeException( "Could not find classpath resource: $srcDir" )
+        URL resource = classLoader.getResource(srcDir);
+        if (resource == null) {
+            throw new RuntimeException("Could not find classpath resource: $srcDir")
         }
 
-        File destinationFile = file( destination )
-        File resourceFile = new File( resource.toURI() )
-        if ( resourceFile.file )
-        {
-            FileUtils.copyFile( resourceFile, destinationFile )
-        }
-        else
-        {
-            FileUtils.copyDirectory( resourceFile, destinationFile )
+        File destinationFile = file(destination)
+        File resourceFile = new File(resource.toURI())
+        if (resourceFile.file) {
+            FileUtils.copyFile(resourceFile, destinationFile)
+        } else {
+            FileUtils.copyDirectory(resourceFile, destinationFile)
         }
     }
 
-    protected final boolean fileExists( String path )
-    {
-        return new File( this.projectDir, path ).exists()
+    protected final boolean fileExists(String path) {
+        return new File(this.projectDir, path).exists()
     }
 }
