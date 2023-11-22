@@ -29,7 +29,7 @@ abstract class AbstractIntegTest
         return GradleRunner.create().
             withProjectDir( this.projectDir ).
             withArguments( args ).
-            withPluginClasspath();
+            withPluginClasspath().withDebug(true)
     }
 
     protected final BuildResult build( final String... args )

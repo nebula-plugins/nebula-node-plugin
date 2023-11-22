@@ -21,6 +21,7 @@ class GruntRule_integTest
         writeFile( 'Gruntfile.js', '''
             module.exports = function(grunt) {
                 grunt.registerTask('simple', []);
+                grunt.registerTask('default', []);
             }
         ''' )
 
