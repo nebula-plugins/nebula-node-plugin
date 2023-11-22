@@ -6,8 +6,10 @@ import com.github.gradle.node.task.NodeTask
 import com.github.gradle.node.variant.VariantComputer
 import org.gradle.api.GradleException
 import org.gradle.api.tasks.*
+import org.gradle.work.DisableCachingByDefault
 import java.io.ByteArrayOutputStream
 
+@DisableCachingByDefault
 abstract class GruntTask : NodeTask() {
     @get:Input
     val useBufferOutput = objects.property(Boolean::class.java).convention(true)
