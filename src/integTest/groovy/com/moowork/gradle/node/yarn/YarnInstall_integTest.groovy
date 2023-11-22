@@ -74,7 +74,7 @@ class YarnInstall_integTest
                 download = true
                 workDir = file('build/node')
                 yarnWorkDir = file('build/yarn')
-                nodeModulesDir = file('subdirectory')
+                nodeProjectDir = file('subdirectory')
             }
         ''' )
         writeFile( 'subdirectory/package.json', """{

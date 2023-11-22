@@ -1,3 +1,4 @@
+/*
 package com.moowork.gradle.gulp
 
 import com.moowork.gradle.node.task.NodeTask
@@ -60,3 +61,4 @@ class GulpTask
         }
     }
 }
+*/

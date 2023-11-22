@@ -1,3 +1,4 @@
+/*
 package com.moowork.gradle.gulp
 
 import com.moowork.gradle.node.npm.NpmTask
@@ -22,3 +23,4 @@ class GulpInstallTask
         }
     }
 }
+*/

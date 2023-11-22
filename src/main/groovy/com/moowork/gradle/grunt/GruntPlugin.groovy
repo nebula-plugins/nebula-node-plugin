@@ -1,3 +1,4 @@
+/*
 package com.moowork.gradle.grunt
 
 import com.moowork.gradle.node.NodePlugin
@@ -31,3 +32,4 @@ class GruntPlugin
         }
     }
 }
+*/

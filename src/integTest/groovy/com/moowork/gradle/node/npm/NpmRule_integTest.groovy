@@ -15,7 +15,6 @@ class NpmRule_integTest
             }
 
             node {
-                npmVersion = "6.1.0"
                 download = true
                 workDir = file('build/node')
             }
@@ -38,7 +37,6 @@ class NpmRule_integTest
             }
             
             node {
-                npmVersion = "6.1.0"
                 download = true
             }
         ''' )
@@ -48,7 +46,7 @@ class NpmRule_integTest
         def result = build( 'npm_run_--version' )
 
         then:
-        result.output =~ /\n6\.1\.0\n/
+        result.output =~ /\n9\.6\.7\n/
         result.task( ':npm_run_--version' ).outcome == TaskOutcome.SUCCESS
     }
 
@@ -60,18 +58,17 @@ class NpmRule_integTest
                 id 'nebula.node'
             }
             node {
-                npmVersion = "6.1.0"
                 download = true
             }
         ''' )
         writeEmptyPackageJson()
 
         when:
-        build( 'npm_install_npm@4.0.2' )
+        build( 'npm_install_npm@9.6.0' )
         def result = build( 'npm_run_--version' )
 
         then:
-        result.output =~ /\n4\.0\.2\n/
+        result.output =~ /\n9\.6\.0\n/
         result.task( ':npm_run_--version' ).outcome == TaskOutcome.SUCCESS
     }
 
@@ -84,7 +81,6 @@ class NpmRule_integTest
             }
 
             node {
-                npmVersion = "6.1.0"
                 download = true
             }
         ''' )
@@ -109,7 +105,6 @@ class NpmRule_integTest
             }
 
             node {
-                npmVersion = "6.1.0"
                 download = true
             }
         ''' )
@@ -171,9 +166,8 @@ class NpmRule_integTest
                 id 'nebula.node'
             }
             node {
-                npmVersion = "6.1.0"
                 download = true
-                nodeModulesDir = file("frontend")
+                nodeProjectDir = file("frontend")
             }
         ''' )
         writeFile( 'frontend/package.json', """{
@@ -189,7 +183,7 @@ class NpmRule_integTest
         def result = build( 'npm_run_whatVersion' )
 
         then:
-        result.output =~ /\n6\.1\.0\n/
+        result.output =~ /\n9\.6\.7\n/
         result.task( ':npm_run_whatVersion' ).outcome == TaskOutcome.SUCCESS
     }
 }

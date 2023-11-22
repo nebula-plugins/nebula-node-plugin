@@ -43,7 +43,7 @@ class Setup_integTest
             }
 
             node {
-                version = "0.10.33"
+                version = "18.17.1"
                 download = true
             }
         ''' )
@@ -89,7 +89,7 @@ class Setup_integTest
             }
 
             node {
-                version = "4.5.0"
+                version = "18.17.1"
                 download = true
             }
         ''' )
@@ -112,7 +112,7 @@ class Setup_integTest
             }
 
             node {
-                version = "0.10.33"
+                version = "18.17.1"
                 download = true
             }
         ''' )

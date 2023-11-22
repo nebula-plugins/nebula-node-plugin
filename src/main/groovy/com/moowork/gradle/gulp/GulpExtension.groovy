@@ -2,8 +2,7 @@ package com.moowork.gradle.gulp
 
 import org.gradle.api.Project
 
-class GulpExtension
-{
+class GulpExtension {
     final static String NAME = 'gulp'
 
     File workDir
@@ -12,8 +11,7 @@ class GulpExtension
 
     Boolean bufferOutput = false
 
-    GulpExtension( final Project project )
-    {
+    GulpExtension(final Project project ) {
         this.workDir = project.projectDir
     }
 }

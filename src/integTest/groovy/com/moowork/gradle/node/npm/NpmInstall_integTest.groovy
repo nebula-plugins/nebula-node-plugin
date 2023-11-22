@@ -15,7 +15,6 @@ class NpmInstall_integTest
             }
 
             node {
-                npmVersion = "6.1.0"
                 download = true
                 workDir = file('build/node')
             }
@@ -38,7 +37,6 @@ class NpmInstall_integTest
                 id 'nebula.node'
             }
             node {
-                npmVersion = "6.1.0"
                 download = true
                 workDir = file('build/node')
             }
@@ -68,10 +66,9 @@ class NpmInstall_integTest
             }
 
             node {
-                npmVersion = "6.1.0"
                 download = true
                 workDir = file('build/node')
-                nodeModulesDir = file('subdirectory')
+                nodeProjectDir = file('subdirectory')
             }
         ''' )
         writeFile( 'subdirectory/package.json', """{
