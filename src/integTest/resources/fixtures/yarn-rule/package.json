@@ -1,7 +1,7 @@
 {
   "name": "example",
   "devDependencies": {
-    "yarn": "1.19.0",
+    "yarn": "1.22.13",
     "concurrently": "5.0.0"
   },
   "dependencies": {
