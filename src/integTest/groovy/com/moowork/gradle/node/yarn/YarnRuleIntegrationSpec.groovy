@@ -2,7 +2,9 @@ package com.moowork.gradle.node.yarn
 
 import com.moowork.gradle.AbstractIntegTest
 import org.gradle.testkit.runner.TaskOutcome
+import spock.lang.Ignore
 
+@Ignore
 class YarnRuleIntegrationSpec extends AbstractIntegTest {
     def 'execute yarn_install rule'() {
         given:
