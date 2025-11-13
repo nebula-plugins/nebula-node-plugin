@@ -4,21 +4,20 @@ import org.apache.commons.io.FileUtils
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.BuildTask
 import org.gradle.testkit.runner.GradleRunner
-import org.junit.Rule
-import org.junit.rules.TemporaryFolder
 import spock.lang.Specification
+import spock.lang.TempDir
 
 abstract class AbstractIntegTest
         extends Specification {
-    @Rule
-    final TemporaryFolder temporaryFolder = new TemporaryFolder();
+    @TempDir
+    File temporaryFolder
 
     def File projectDir;
 
     def File buildFile;
 
     def setup() {
-        this.projectDir = this.temporaryFolder.root;
+        this.projectDir = this.temporaryFolder;
         this.buildFile = createFile('build.gradle')
         // Enable configuration cache :)
         new File(projectDir, 'gradle.properties') << '''org.gradle.configuration-cache=true'''.stripIndent()
@@ -53,7 +52,7 @@ abstract class AbstractIntegTest
     }
 
     protected final File createFile(final String name) {
-        return new File(this.temporaryFolder.getRoot(), name);
+        return new File(this.temporaryFolder, name);
     }
 
     protected final void writeFile(final String name, final String text) {
